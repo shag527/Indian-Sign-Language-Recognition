@@ -1,0 +1,415 @@
+/*
+ * Author 	: HIMANSHU GUPTA 
+ * Email 		: himanshucse2012@gmail.com
+ * Website	:	http://www.indioweb.in/portfolio
+ */
+ 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);
+ 
+/*
+ * Basic CSS starts 
+ */
+
+body{
+	color: #474747;
+  font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+}
+
+p{
+	margin:0;
+	padding:0;
+	font-size: 13px;
+	line-height: 24px;
+}
+
+a{
+	color: #898989;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #676767;
+	text-decoration: none;
+}
+
+a:hover,a:active,a:focus {
+	outline: 0;
+}
+
+hr{
+
+}
+
+:focus {
+	outline:none;
+}
+
+::-moz-focus-inner {
+	border:0;
+}
+
+.pad { padding: 120px 0;}
+
+/* 
+ * Basic CSS ends 
+ */
+
+header .navbar-default {
+	margin: 0;
+	border-radius: 0;
+	border-bottom: 1px solid rgba(0,0,0,0.15);
+	box-shadow: 0 1px 12px rgba(0,0,0,0.3);
+}
+header .navbar-brand { 
+	display: inline-block;
+	margin-right: 60px;
+}
+header .navbar-brand img {
+	max-width:190px;
+	position: relative;
+	top: -11px;
+}
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus,
+header .navbar-default .navbar-nav>li>a {
+	border-left: 1px solid #d3d3d3;
+}
+header .navbar-default .navbar-nav li:last-child a {
+	border-right: 1px solid #d3d3d3;
+}
+
+header .navbar-form .form-control {
+	box-shadow: none !important;
+	border: 1px solid #d3d3d3;
+	border-radius: 4px;
+}
+
+/*
+ * main area
+ */
+ 
+.main-content {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	background: #fff url('../img/back.jpg') center center no-repeat fixed;
+}
+.main-content.bottom-0 { padding-bottom: 0; }
+/*
+ * banner
+ */
+ 
+.banner {
+	padding-top: 60px;
+	padding-bottom: 180px;
+	text-align: center;
+}
+
+.banner h2 {
+	margin: 0;
+	font-size: 30px;
+	font-weight: 400;
+}
+.banner h2 span{
+	display: inline-block;
+	margin-top: 10px;
+	padding: 3px 12px;
+	font-size: 38px;
+	font-weight: 600;
+	background: #ec971f;
+	color: #fff;
+}
+
+.banner p {
+	margin-top: 15px;
+	font-size: 16px;
+	line-height: 30px;
+	text-transform: capitalize;
+	letter-spacing: 0.05em; 
+}
+
+/* 
+ * hero
+ */
+ 
+.hero {
+	background: #fff;
+	text-align: center;
+}
+
+.hero .hero-content h2 {
+	margin-top: 0;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	letter-spacing: 0.08em; 
+}
+
+.hero .hero-content p {
+	margin-top: 0;
+	text-transform: uppercase;
+	letter-spacing: 0.08em; 
+	font-style: italic;
+	color: #ec971f;
+	font-size: 14px;
+}
+
+.hero .hero-content .btn {
+	margin-top: 20px;
+	padding: 7px 25px;
+	border-radius: 30px;
+	font-weight: 600;
+}
+
+/*
+ * default heading
+ */
+ 
+.default-heading {
+	margin-bottom: 30px;
+	text-align: center;
+}
+.default-heading h2 {
+	display: inline-block;
+	margin-top: 0;
+	padding: 0 20px;
+	padding-bottom: 10px;
+	font-size: 35px;
+	border-bottom: 2px solid #ddd;
+}
+
+/*
+ * benefits
+ */
+ 
+.benefits {
+	padding-top: 0px;
+	background: #fff;
+}
+
+.benefits .benefits-item {
+	max-width: 360px;
+	margin: 0 auto;
+	margin-top: 40px;
+	text-align: center;
+}
+.benefits .benefits-item i {
+	display: block;
+	width: 60px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 50px;
+	color: #ec971f;
+}
+
+.benefits .benefits-item h3 {
+	margin-bottom: 20px;
+}
+
+/*
+ * cta
+ */
+ 
+.cta {
+	padding-bottom: 80px;
+	text-align: center;
+	background: #fff;
+}
+
+.cta h3 {
+	margin-top: 0;
+	text-transform: capitalize;
+	letter-spacing: 0.08em; 
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.cta h3 span {
+	background: #ec971f;
+	padding: 0 5px;
+	color: #fff;
+}
+
+.cta .cta-content p {
+	text-transform: uppercase;
+	letter-spacing: 0.08em; 
+	font-style: italic;
+	color: #ec971f;
+}
+
+/*
+ * testimonial
+ */
+ 
+.testimonial .carousel-inner .item {text-align: center;}
+.testimonial .carousel-inner .item h3 {
+	margin-top:0;
+	font-size: 23px;
+	margin-bottom: 10px;
+}
+
+.testimonial .carousel-inner .item p {
+	max-width: 920px;
+	margin: 0 auto;
+	letter-spacing: 0.01em; 
+	font-size: 15px;
+	font-style: italic;
+	line-height: 27px;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+	top: 50%;
+	width: 5%;
+	margin-top: -10px;
+	background: transparent;
+	text-shadow: none;
+	opacity: 1;
+}
+
+/*
+ * blog
+ */
+ 
+.blog {
+	padding-bottom: 80px;
+	background: #fff;
+}
+.blog .entry {
+	max-width: 580px;
+	margin: 0 auto;
+	margin-top: 30px;
+	padding-bottom: 20px;
+	border-bottom: 1px dashed #ddd;
+}
+.blog .entry .entry-pic {
+	max-width: 220px;
+	padding: 1px;
+	border: 1px solid #ec971f;
+	border-radius: 5px;
+	float: left;
+}
+.blog .entry .entry-pic img {	border-radius: 4px; }
+.blog .entry .entry-post {	margin-left: 240px; }
+.blog .entry .entry-post .meta {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 15px;
+	font-style: italic;
+	color: #ec971f;
+}
+
+.blog .entry .entry-post h3 {
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-size: 22px;
+	line-height: 28px;
+}
+.blog .entry .entry-post p {
+	line-height: 22px;
+}
+
+.blog .blog-btn {
+	margin-top: 80px;
+	text-align: center;
+}
+.blog .blog-btn .btn {
+	padding: 8px 25px;
+	font-size: 18px;
+	border-radius: 30px;
+}
+
+
+
+/*
+ * login & registration page content
+ */
+
+.main-content .login-area,
+.main-content .register-area {
+	max-width: 450px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.main-content .login-area h3,
+.main-content .register-area h3 {
+	margin-top: 0;
+	padding-top: 30px;
+	font-size: 22px;
+}
+
+.main-content .login-area form,
+.main-content .register-area form {
+	max-width: 300px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	text-align: left;
+}
+
+.main-content .login-area form .form-control,
+.main-content .register-area form .form-control {
+	box-shadow: none !important;
+	border: 1px solid #d3d3d3;
+	border-radius: 4px;
+}
+.main-content .login-area form .btn {
+	display: block;
+	width: 100%;
+	margin-top: 15px;
+}
+.main-content .register-area form .btn {
+	margin-top: 5px;
+}
+
+/*
+ * footer
+ */
+ 
+footer {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background: #353535;
+}
+
+footer p {
+	color: #bbb;
+	font-size: 13px;
+	line-height: 24px;
+}
+
+/*
+ * Responsive CSS 
+ */
+
+/*
+ * Mobile phones 
+ */
+@media (max-width: 480px){
+	.blog .entry .entry-pic {	
+		float: none;
+		max-width: 400px;
+		margin: 0 auto;
+		margin-bottom: 15px;
+	}
+	.blog .entry .entry-post {	margin-left: 0; }
+}
+
+/*
+ * Tablets 
+ */
+@media (max-width: 767px){
+	header .navbar-form { display: block !important; }
+}
+
+/*
+ * Desktop 
+ */
+@media (max-width: 991px){
+	header .navbar-form { display: none; }
+}
