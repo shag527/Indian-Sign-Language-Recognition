@@ -20,10 +20,10 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import cross_val_score
 import seaborn as sbn
 
-data=pd.read_csv('/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/train.csv',low_memory=False)
+data=pd.read_csv('csv files/train.csv',low_memory=False)
 data.head()
 
-test=pd.read_csv('/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/test.csv',low_memory=False)
+test=pd.read_csv('csv files/test.csv',low_memory=False)
 test.head()
 
 x=data.iloc[:,0:180]
