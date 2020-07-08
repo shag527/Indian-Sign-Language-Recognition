@@ -29,7 +29,7 @@ from keras.callbacks import TensorBoard
 import matplotlib.pyplot as plt
 from keras.utils import to_categorical
 
-# Loading test images into an array 
+# Loading images 
 # Converting images to an size of (100,100)
 
 def load_images(folder):
@@ -53,7 +53,7 @@ train_data=load_images(path)
 from google.colab import drive
 drive.mount('/content/drive')
 
-# Loading the training images and their corresponding labels
+# Loading the test images and their corresponding labels
 
 path='/content/drive/My Drive/Colab Notebooks/ISL Recognition/ISL Datasets/Train-Test/Test'
 test_data=load_images(path)
@@ -76,8 +76,8 @@ for feature, label in test_data:
   test_images.append(feature)
   test_labels.append(label)
 
-print(len(train_images))
-print(len(test_images))
+#print(len(train_images))
+#print(len(test_images))
 
 # Converting images list to numpy array
 train_images=np.array(train_images)
