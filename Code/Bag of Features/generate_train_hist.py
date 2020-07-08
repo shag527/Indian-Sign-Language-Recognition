@@ -20,7 +20,7 @@ from sklearn.cluster import KMeans
 from sklearn.cluster import MiniBatchKMeans
 
 n_classes=36
-clustering_factor=7
+clustering_factor=6
 
 import tensorflow as tf
 
@@ -35,12 +35,7 @@ tf.config.experimental_connect_to_cluster(tpu)
 tf.tpu.experimental.initialize_tpu_system(tpu)
 tpu_strategy = tf.distribute.experimental.TPUStrategy(tpu)
 
-#path='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Preprocessing'
-#sys.path.append(path)
-
-#from _surf_feature_extraction import surf_features
-!pip install opencv-python==3.4.2.16
-!pip install opencv-contrib-python==3.4.2.16
+# Implementing Bag of Features Model
 
 def surf_features(images):
   surf_descriptors_class_by_class={}
@@ -56,8 +51,6 @@ def surf_features(images):
     surf_descriptors_class_by_class[key]=features
     print(key," Completed!")
   return [surf_descriptors_list,surf_descriptors_class_by_class]
-
-# Implementing Bag of Features Model
 
 # Creating a visual dictionary using only the train dataset 
 # K-means clustering alogo takes only 2 parameters which are number of clusters (k) and descrpitors list
@@ -88,42 +81,6 @@ def load_images_by_category(folder):
     print(label, "ended")
   return images
 
-'''# Finding the centre to which a feature belong
-
-def find_index(image,center):
-  count=0
-  ind=0
-  for i in range(len(center)):
-    if(i==0):
-      count=distance.euclidean(image,center[i])
-    else:
-      dist=distance.euclidean(image,center[i])
-      if(dist<count):
-        ind=i
-        count=dist
-  return ind'''
-
-'''# Creating histograms for train images
-
-# Function takes 2 parameters. The first one is a dictionary that holds the descriptors that are separated class by class 
-# And the second parameter is an array that holds the central points (visual words) of the k means clustering
-# Returns a dictionary that holds the histograms for each images that are separated class by class. 
-
-def image_class(all_bows,centers):
-  features_dict={}
-  for key,value in all_bows.items():
-    print(key," Started!")
-    category=[]
-    for img in value:
-      histogram=np.zeros(len(centers))
-      for each_feature in img:
-        ind=find_index(each_feature,centers)
-        histogram[ind]+=1
-      category.append(histogram)
-    features_dict[key]=category
-    print(key," Completed!")
-  return features_dict'''
-
 # Creating histograms for train images
 
 # Function takes 2 parameters. The first one is a dictionary that holds the descriptors that are separated class by class 
@@ -143,25 +100,13 @@ def create_histogram(all_descs,kmeans):
     print(key," Completed!")
   return features_dict
 
-train_folder='/content/drive/My Drive/Colab Notebooks/ISL Recognition/ISL Datasets/Train-Test/Train'
+train_folder='ISL Datasets/Train-Test/Train'
 
+# Load train images
 train_images=load_images_by_category(train_folder)
-print(len(train_images))
+#print(len(train_images))
 
-print(len(train_images['a'][0][0]))
-
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/train_images'
-outfile=open(file_name,'wb')
-pickle.dump(train_images,outfile)
-outfile.close()
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/train_images'
-
-infile = open(filename,'rb')
-train_images = pickle.load(infile)
-infile.close()
-
-(len(train_images['a'][1]))
+#print(len(train_images['a'][0][0]))
 
 #Extracting surf features from each image stored in train_images list
 
@@ -169,81 +114,25 @@ surfs=surf_features(train_images)
 all_train_descriptors=surfs[0]
 train_descriptors_by_class=surfs[1]
 
-print(len(surfs[0]))
-print(len(surfs[1]['0'][1]))
-
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/descriptors_list'
-outfile=open(file_name,'wb')
-pickle.dump(descriptors_list,outfile)
-outfile.close()
-
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/all_bow_features'
-outfile=open(file_name,'wb')
-pickle.dump(all_bow_features,outfile)
-outfile.close()
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/descriptors_list'
-
-infile = open(filename,'rb')
-descriptors_list = pickle.load(infile)
-infile.close()
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/all_bow_features'
-
-infile = open(filename,'rb')
-all_bow_features = pickle.load(infile)
-infile.close()
+#print(len(surfs[0]))
+#print(len(surfs[1]['0'][1]))
 
 # Calling MiniBatchkmeans function and getting central points
-visual_words,kmeans=minibatchkmeans(150,all_train_descriptors)
+visual_words,kmeans=minibatchkmeans(n_classes*clustering_factor,all_train_descriptors)
 
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/kmeans150'
-outfile=open(file_name,'wb')
-pickle.dump(kmeans,outfile)
-outfile.close()
 
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/visual_words'
-outfile=open(file_name,'wb')
-pickle.dump(visual_words,outfile)
-outfile.close()
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/visual_words'
-
-infile = open(filename,'rb')
-visual_words = pickle.load(infile)
-infile.close()
-
-'''# Calling image_class function and getting histogram for each image
-bows_train=image_class(all_bow_features,visual_words)'''
-
-# Calling image_class function and getting histogram for each image
+# Calling create_histogram and getting histogram for each image
 bows_train=create_histogram(train_descriptors_by_class,kmeans)
 
-print((bows_train['a'][0][1]))
+#print((bows_train['a'][0][1]))
 
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/bows_train'
-outfile=open(file_name,'wb')
-pickle.dump(bows_train,outfile)
-outfile.close()
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/bows_train'
-
-infile = open(filename,'rb')
-bows_train = pickle.load(infile)
-infile.close()
-
-print(len(bows_train))
-
-print(bows_train['z'][0][13])
-
-print(len(bows_train['2'][1]))
-
+# Saving .csv file
 import csv
-loc='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/Train150.csv'
+loc='cnn files/train.csv'
 with open(loc,'w',newline='') as file:
   writer=csv.writer(file)
   header=[]
-  for i in range (1,151):
+  for i in range (1,n_classes*clustering_factor):
     header.append(str('pixel')+str(i))
   header.append('Label')
   writer.writerow(header)
