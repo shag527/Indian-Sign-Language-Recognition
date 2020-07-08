@@ -18,8 +18,10 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
 from sklearn.metrics import accuracy_score, precision_score, f1_score, recall_score
 from sklearn.preprocessing import LabelEncoder
+import seaborn as sbn
+from sklearn.metrics import confusion_matrix
 
-data=pd.read_csv('/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/Train150.csv',low_memory=False)
+data=pd.read_csv('cnn files/train.csv',low_memory=False)
 data.head()
 
 x=data.iloc[:,0:150]
@@ -33,7 +35,7 @@ print("Naive Bayes Started!")
 GaussNB.fit(x,y)
 print("Naive Bayes Finished !")
 
-test=pd.read_csv('/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/Test150.csv',low_memory=False)
+test=pd.read_csv('cnn files/test.csv',low_memory=False)
 
 x_test=test.iloc[:,0:150]
 y_test=test.iloc[:,-1]
@@ -46,16 +48,6 @@ x_test.shape
 
 y_expect=y_test
 y_pred=GaussNB.predict(x_test)
-
-import pickle
-
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/GaussNB'
-outfile=open(file_name,'wb')
-pickle.dump(GaussNB,outfile)
-outfile.close()
-
-print(y_pred)
-len(y_pred)
 
 print(accuracy_score(y_expect,y_pred))
 
@@ -79,24 +71,8 @@ y_pred=BernNB.predict(x_test)
 
 print(accuracy_score(y_expect,y_pred))
 
-import pickle
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/hist_orig'
-
-infile = open(filename,'rb')
-hist_test= pickle.load(infile)
-infile.close()
-
-hist_test=hist_test.reshape(1,-1)
-hist_test
-
-op=GaussNB.predict(hist_test)
-
-op
-
-from sklearn.metrics import confusion_matrix
 c_m=confusion_matrix(y_test,y_pred)
 
-import seaborn as sbn
 df_cm=pd.DataFrame(c_m)
 
 plt.figure(figsize=(20,17))
