@@ -26,7 +26,7 @@ selection=1
 
 # =====================Create Database=============================================
 def createdb():
-    conn = sqlite3.connect('saveddata.db')
+    conn = sqlite3.connect('files/users_info.db')
     c = conn.cursor()
     c.execute(
         "CREATE TABLE IF NOT EXISTS users (name TEXT , passs TEXT,sqltime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)")
@@ -46,7 +46,7 @@ def saveadmin():
     elif pass_err == "":
         messagebox.showinfo("Invalid input", "Password can't be Empty")
     else:
-        conn = sqlite3.connect("saveddata.db")
+        conn = sqlite3.connect("files/users_info.db")
         c = conn.cursor()
         c.execute("INSERT INTO users(name,passs) VALUES(?,?) ", (name_entry.get(), pass_entry.get()))
         conn.commit()
@@ -58,7 +58,7 @@ def loggin():
     while True:
         a = name2_entry.get()
         b = pass2_entry.get()
-        with sqlite3.connect("saveddata.db") as db:
+        with sqlite3.connect("files/users_info.db") as db:
             cursor = db.cursor()
         find_user = ("SELECT * FROM users WHERE name = ? AND passs = ?")
         cursor.execute(find_user, [(a), (b)])
@@ -84,10 +84,10 @@ def loggin():
                                relief=SUNKEN)
                 label3.pack(side=TOP, fill=X)
 
-                label4 = Label(f2, text="Indian Sign Language Recognition System", font=("arial", 10, "bold"), bg="grey16",
+                label4 = Label(f2, text="                            Indian Sign Language Recognition System", font=("arial", 10, "bold"), bg="grey16",
                                fg="white")
                 label4.pack(side=BOTTOM, fill=X)
-                statusbar = Label(f1, text="Indian Sign Language Recognition System", font=("arial", 8, "bold"),
+                statusbar = Label(f1, text="                            Indian Sign Language Recognition System", font=("arial", 8, "bold"),
                                   bg="grey16", fg="white", relief=SUNKEN, anchor=W)
                 statusbar.pack(side=BOTTOM, fill=X)
 
@@ -172,10 +172,10 @@ def loggin():
                         super(AnimatedGIF, self).place_forget(**kwargs)
 
                 if __name__ == "__main__":
-                    l = AnimatedGIF(f1, "files/giff.gif")
+                    l = AnimatedGIF(f1, "files/gif2.gif")
                     l.pack()
 
-                label4 = Label(f3, text="Indian Sign Language Recognition System", font=("arial", 10, "bold"), bg="grey16",
+                label4 = Label(f3, text="                            Indian Sign Language Recognition System", font=("arial", 10, "bold"), bg="grey16",
                                fg="white")
                 label4.pack(side=BOTTOM, fill=X)
 
@@ -194,7 +194,7 @@ def loggin():
 
                 label10 = Label(f4, text="", font=("arial", 20, "bold"), bg="grey16", fg="white")
                 label10.pack(side=TOP, fill=X)
-                label11 = Label(f4, text="a", font=("arial", 10, "bold"), bg="grey16",
+                label11 = Label(f4, text="     Indian Sign Language Recognition System", font=("arial", 10, "bold"), bg="grey16",
                                 fg="white")
                 label11.pack(side=BOTTOM, fill=X)
 
@@ -203,7 +203,7 @@ def loggin():
 
                 def swap4(frame):
                     frame.tkraise()
-                    statusbar['text'] = 'Facial Recognition Attendance System'
+                    statusbar['text'] = '                            Indian Sign Language Recognition System'
 
                 btn4w2 = ttk.Button(f4, text="Back	", command=lambda: swap4(f1))
                 btn4w2.place(x=3, y=40, width=50, height=30)

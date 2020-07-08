@@ -47,7 +47,6 @@ def pred_main():
         method = 2
     else:
         method = 1
-    print(option)
 
     pred.destroy()
 
@@ -259,11 +258,11 @@ def pred_main():
                             result_list = []
                             if prev_sign is not None:
                                 if prev_sign != predict_sign:
-                                    #print(words_list)
+                                    # print(words_list)
                                     words_list += str(predict_sign)
                                     Thread(target=say_sign, args=(predict_sign,)).start()
-                                else:
-                                    Thread(target=say_sign, args=(predict_sign,)).start()
+                            else:
+                                Thread(target=say_sign, args=(predict_sign,)).start()
                                 # prev_sign=predict_sign
                             prev_sign = predict_sign
                         # print(words_list)
