@@ -20,14 +20,7 @@ from sklearn.cluster import KMeans
 from sklearn.cluster import MiniBatchKMeans
 
 n_classes=36
-clustering_factor=5
-
-#path='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Preprocessing'
-#sys.path.append(path)
-
-#from _surf_feature_extraction import surf_features
-!pip install opencv-python==3.4.2.16
-!pip install opencv-contrib-python==3.4.2.16
+clustering_factor=6
 
 def surf_features(images):
   surf_vectors_list={}
@@ -61,42 +54,6 @@ def load_images_by_category(folder):
     print(label, "ended")
   return images
 
-'''# Finding the centre to which a feature belong
-
-def find_index(image,center):
-  count=0
-  ind=0
-  for i in range(len(center)):
-    if(i==0):
-      count=distance.euclidean(image,center[i])
-    else:
-      dist=distance.euclidean(image,center[i])
-      if(dist<count):
-        ind=i
-        count=dist
-  return ind'''
-
-'''# Creating histograms for train images
-
-# Function takes 2 parameters. The first one is a dictionary that holds the descriptors that are separated class by class 
-# And the second parameter is an array that holds the central points (visual words) of the k means clustering
-# Returns a dictionary that holds the histograms for each images that are separated class by class. 
-
-def image_class(all_bows,centers):
-  features_dict={}
-  for key,value in all_bows.items():
-    print(key," Started!")
-    category=[]
-    for img in value:
-      histogram=np.zeros(len(centers))
-      for each_feature in img:
-        ind=find_index(each_feature,centers)
-        histogram[ind]+=1
-      category.append(histogram)
-    features_dict[key]=category
-    print(key," Completed!")
-  return features_dict'''
-
 # Creating histograms for train images
 
 # Function takes 2 parameters. The first one is a dictionary that holds the descriptors that are separated class by class 
@@ -110,83 +67,31 @@ def create_histogram(all_bows,kmeans):
     category=[]
     for desc in value:
       visual_words=kmeans.predict(desc)
-      hist = np.array(np.bincount(visual_words,minlength=150))
+      hist = np.array(np.bincount(visual_words,minlength=n_classes*clustering_factor))
       category.append(hist)
     features_dict[key]=category
     print(key," Completed!")
   return features_dict
 
-test_folder='/content/drive/My Drive/Colab Notebooks/ISL Recognition/ISL Datasets/Train-Test/Test'
+test_folder='ISL Datasets/Train-Test/Test'
 
+# Loading Test images
 test_images=load_images_by_category(test_folder)
 
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/test_images'
-outfile=open(file_name,'wb')
-pickle.dump(test_images,outfile)
-outfile.close()
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/test_images'
-
-infile = open(filename,'rb')
-test_images = pickle.load(infile)
-infile.close()
-
-(len(test_images['a'][1]))
-
+#Extract SURF features from the image
 surf_test=surf_features(test_images)[1]
 
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/surf_test'
-outfile=open(file_name,'wb')
-pickle.dump(surf_test,outfile)
-outfile.close()
+#print(len(surf_test['a'][0]))
 
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/surf_test'
-
-infile = open(filename,'rb')
-surf_test = pickle.load(infile)
-infile.close()
-
-#bows_test=image_class(surf_test,visual_words)
-
-print(len(surf_test['a'][0]))
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/kmeans150'
-
-infile = open(filename,'rb')
-kmeans = pickle.load(infile)
-infile.close()
-
-#bows_test=image_class(surf_test,visual_words)
-
+# Create histograms from extracted surf features
 bows_test=create_histogram(surf_test,kmeans)
 
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/bows_test'
-outfile=open(file_name,'wb')
-pickle.dump(bows_test,outfile)
-outfile.close()
-
-print(len(bows_test['a'][0]))
-print(len(bows_test['v']))
-#print(bows_train.items())
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/bows_train'
-
-infile = open(filename,'rb')
-bows_train = pickle.load(infile)
-infile.close()
-
-filename='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/bows_test'
-
-infile = open(filename,'rb')
-bows_test = pickle.load(infile)
-infile.close()
-
 import csv
-loc='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/Test150.csv'
+loc='cnn files/test.csv'
 with open(loc,'w',newline='') as file:
   writer=csv.writer(file)
   header=[]
-  for i in range (1,151):
+  for i in range (1,n_classes*clustering_factor+1):
     header.append(str('pixel')+str(i))
   header.append('Label')
   writer.writerow(header)
@@ -199,60 +104,3 @@ with open(loc,'w',newline='') as file:
         list.append(bows_test[label][i][j])
       list.append(label)
       writer.writerow(list)
-
-# KNN algorithm, where K=1. We use this for predict the class of test images.
-# Takes 2 parameters. train is the feature vectors of train images and tests is the feature vectors of test images
-# Returns an array that holds number of test images, number of correctly predicted images and records of class based images respectively
-
-def knn(train,test):
-  num_test=0
-  correct_predict=0
-  class_based={}
-
-  for test_key,test_val in test.items():
-    print(test_key," Started!")
-    class_based[test_key]=[0,0]                    #[correct,all]
-    for test in test_val:
-      predict_start=0
-      min=0
-      key="a"
-      for train_key,train_val in train.items():
-        for tr in train_val:
-          if(predict_start==0):
-            min=distance.euclidean(test,tr)
-            key=train_key
-            predict_start+=1
-          else:
-            dist=distance.euclidean(test,tr)
-            if(dist<min):
-              min=dist
-              key=train_key
-
-      if(test_key==key):
-        correct_predict+=1
-        class_based[test_key][0]+=1
-      num_test+=1
-      class_based[test_key][1]+=1
-    print(test_key," Completed!")
-  return [num_test,correct_predict,class_based]
-
-results=knn(bows_train,bows_test)
-
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/results'
-outfile=open(file_name,'wb')
-pickle.dump(results,outfile)
-outfile.close()
-
-#Calculating the accuracy
-# Function calculates the average accuracy of the model as well as class based accuracy for all classes
-
-def accuracy(results):
-  avg_acc=(results[1]/results[0])*100
-  print("Average accuracy: %",avg_acc)
-  print("\nClass Based accuracies: \n")
-  for key,val in results[2].items():
-    acc=(val[0]/val[1])*100
-    print(key," : %",acc)
-
-accuracy(results)
-
