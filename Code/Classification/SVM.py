@@ -20,10 +20,10 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import cross_val_score
 import seaborn as sbn
 
-data=pd.read_csv('/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/Train150.csv',low_memory=False)
+data=pd.read_csv('cnn files/train.csv',low_memory=False)
 data.head()
 
-test=pd.read_csv('/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/Test150.csv',low_memory=False)
+test=pd.read_csv('cnn files/test.csv',low_memory=False)
 test.head()
 
 x=data.iloc[:,0:150]
@@ -52,7 +52,7 @@ print(classification_report(y_test,y_pred)) #150
 
 import pickle
 
-file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/SVM150'
+file_name='/content/drive/My Drive/Colab Notebooks/ISL Recognition/Saved Files/SVM'
 outfile=open(file_name,'wb')
 pickle.dump(cls,outfile)
 outfile.close()
