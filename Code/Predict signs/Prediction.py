@@ -38,17 +38,13 @@ def pred_main():
     prev_sign=None
     count_same_sign=0
 
-    pred=tk.Tk()
-
     method = 1
 
-    option = messagebox.askquestion('Select option', 'Is your background plain?')
+    option = messagebox.askquestion('Select option', 'Choose default method ?')
     if option == 'yes':
         method = 2
     else:
         method = 1
-
-    pred.destroy()
 
     model='files/CNN'
 
@@ -57,6 +53,7 @@ def pred_main():
     infile.close()
 
     bg=None
+    count=0
 
     #To find the running average over the background
     def run_avg(image,aweight):
@@ -91,8 +88,6 @@ def pred_main():
         engine.say(sign)
         engine.runAndWait()
 
-
-
     def n(x):
         pass
 
@@ -109,6 +104,9 @@ def pred_main():
     while(cam.isOpened()):
         _,frame=cam.read(cv2.CAP_DSHOW)
         if frame is not None:
+            orig_signs=cv2.imread('files/signs.png')
+            signs=cv2.resize(orig_signs,(600,600))
+            cv2.imshow("Signs",signs)
             frame=imutils.resize(frame,width=700)
             frame=cv2.flip(frame,1)
             clone=frame.copy()
@@ -124,7 +122,10 @@ def pred_main():
                     run_avg(gray,aWeight)
                     cv2.putText(clone, "Keep the Camera still.", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0))
                 else:
-                    cv2.putText(clone, "Put your hand in the rectangle", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                    cv2.putText(clone, "Press esc to exit.", (10, 200), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                    cv2.putText(clone, "Keep the Camera still.", (10, 50), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0))
+                    cv2.putText(clone, "Put your hand in the rectangle", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.5,(0, 0, 0))
+                    cv2.putText(clone, "Press the key of the sample", (10, 150), cv2.FONT_HERSHEY_COMPLEX, 0.5,(0, 0, 0))
                     hand=extract_hand(gray)
                     if hand is not None:
                         thresh,max_cont=hand
@@ -138,8 +139,6 @@ def pred_main():
                         mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
                         res=cv2.bitwise_and(roi,roi,mask=mask)
                         res=cv2.cvtColor(res,cv2.COLOR_BGR2GRAY)
-                        #v = np.median(res)
-                        #sigma=0.33
 
                         #---- Apply automatic Canny edge detection using the computed median----
 
@@ -151,7 +150,6 @@ def pred_main():
                         hand=cv2.bitwise_and(gray,gray,mask=thresh)
                         cv2.imshow("Hand",hand)
                         res = cv2.Canny(hand, lowThresh, high_thresh)
-                        cv2.imshow("Hand res", res)
 
                         # Bag of Visual Words
                         '''surf = cv2.xfeatures2d.SURF_create()
@@ -167,6 +165,7 @@ def pred_main():
                             sign = svm.predict(hist)
                             # output=visual_dict[sign[0]]
                             cv2.putText(clone,output, (10, 300), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 0, 0))'''
+
                         # CNN Model
                         if res is not None and cv2.contourArea(max_cont) > 1000:
                             final_res = cv2.resize(res, (100, 100))
@@ -183,11 +182,11 @@ def pred_main():
 
                             # print(count)
                             count += 1
-                            if (count > 10 and count <= 45):
-                                if (prob * 100 > 90):
+                            if (count > 10 and count <= 50):
+                                if (prob * 100 > 95):
                                     result_list.append(final_sign)
                                     # print(sign, prob)
-                            elif (count > 45):
+                            elif (count > 50):
                                 count = 0
                                 if len(result_list):
                                     predict_sign = (max(set(result_list), key=result_list.count))
@@ -204,6 +203,22 @@ def pred_main():
                                 # print(words_list)
                                 # cv2.putText(clone,'Sign'+str(predict_sign), (100, 300), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 0, 0))
 
+                            '''print(final_sign, " ", prev_sign," ",prob)
+                            #if prev_sign and prob>=90:
+                            if final_sign == prev_sign:
+                                count+=1
+                            else:
+                                count=0
+
+                            if count>15:
+                                Thread(target=say_sign, args=(final_sign,)).start()
+                                count=0
+
+                            prev_sign=final_sign
+                            print(count)'''
+
+
+
                         else:
                             if words_list is not None:
                                 # Thread(target=say_sign,args=(words_list,)).start()
@@ -218,69 +233,84 @@ def pred_main():
                 us = cv2.getTrackbarPos("US", "Tracking")
                 uv = cv2.getTrackbarPos("UV", "Tracking")
 
+                cv2.putText(clone, "Put your hand in the rectangle", (10, 50), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                cv2.putText(clone, "Adjust the values using trackbar", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.5,(0, 0, 0))
+                cv2.putText(clone, "Press the key of the sample", (10, 150), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                cv2.putText(clone, "Press esc to exit.", (10, 200), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+
                 l_b = np.array([lh, ls, lv])
                 u_b = np.array([uh, us, uv])
 
                 mask = cv2.inRange(hsv, l_b, u_b)
-                cv2.imshow('mask', mask)
                 mask = cv2.bitwise_not(mask)
                 res = cv2.bitwise_and(roi, roi, mask=mask)
                 res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
-                cv2.imshow('res', res)
-                high_thresh, thresh_im = cv2.threshold(res, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-                lowThresh = 0.5 * high_thresh
-                res = cv2.Canny(res, lowThresh, high_thresh)
-                cv2.imshow('Canny', res)
 
-                # CNN Model
-                if res is not None:
-                    final_res = cv2.resize(res, (100, 100))
-                    final_res = np.array(final_res)
-                    final_res = final_res.reshape((-1, 100, 100, 1))
-                    final_res.astype('float32')
-                    final_res = final_res / 255.0
-                    output = cnn.predict(final_res)
-                    prob = np.amax(output)
-                    sign = np.argmax(output)
-                    final_sign = visual_dict[sign]
-                    cv2.putText(clone, 'Sign ' + str(final_sign), (10, 200), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 0, 255))
+                (_, cnts, _) = cv2.findContours(res, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                if len(cnts)>0:
+                    max_cont = max(cnts, key=cv2.contourArea)
+                    if max_cont is not None:
+                        mask = cv2.drawContours(res, [max_cont + (r, t)], -1, (0, 0, 255))
+                        cv2.imshow("Threshold", mask)
+                        mask = np.zeros(res.shape, dtype="uint8")
+                        cv2.drawContours(mask, [max_cont], -1, 255, -1)
+                        res = cv2.bitwise_and(res, res, mask=mask)
+                        cv2.imshow('mask', mask)
 
-                    # print(count)
-                    count += 1
-                    if (count > 10 and count <= 45):
-                        if (prob * 100 > 90):
-                            result_list.append(final_sign)
-                            # print(sign, prob)
-                    elif (count > 45):
-                        count = 0
-                        if len(result_list):
-                            predict_sign = (max(set(result_list), key=result_list.count))
-                            result_list = []
-                            if prev_sign is not None:
-                                if prev_sign != predict_sign:
-                                    # print(words_list)
-                                    words_list += str(predict_sign)
-                                    Thread(target=say_sign, args=(predict_sign,)).start()
-                            else:
-                                Thread(target=say_sign, args=(predict_sign,)).start()
-                                # prev_sign=predict_sign
-                            prev_sign = predict_sign
-                        # print(words_list)
-                        # cv2.putText(clone,'Sign'+str(predict_sign), (100, 300), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 0, 0))
+                        high_thresh, thresh_im = cv2.threshold(res, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+                        lowThresh = 0.5 * high_thresh
+                        res = cv2.Canny(res, lowThresh, high_thresh)
 
-                else:
-                    if words_list is not None:
-                        # Thread(target=say_sign,args=(words_list,)).start()
-                        words_list.clear()
+                        # CNN Model
+                        if res is not None and cv2.contourArea(max_cont) > 1000:
+                            final_res = cv2.resize(res, (100, 100))
+                            final_res = np.array(final_res)
+                            final_res = final_res.reshape((-1, 100, 100, 1))
+                            final_res.astype('float32')
+                            final_res = final_res / 255.0
+                            output = cnn.predict(final_res)
+                            prob = np.amax(output)
+                            sign = np.argmax(output)
+                            final_sign = visual_dict[sign]
+                            cv2.putText(clone, 'Sign ' + str(final_sign), (10, 200), cv2.FONT_HERSHEY_COMPLEX, 2,
+                                        (0, 0, 255))
 
+                            # print(count)
+                            count += 1
+                            if (count > 10 and count <= 50):
+                                if (prob * 100 > 95):
+                                    result_list.append(final_sign)
+                                    # print(sign, prob)
+                            elif (count > 50):
+                                count = 0
+                                if len(result_list):
+                                    predict_sign = (max(set(result_list), key=result_list.count))
+                                    result_list = []
+                                    if prev_sign is not None:
+                                        if prev_sign != predict_sign:
+                                            # print(words_list)
+                                            words_list += str(predict_sign)
+                                            Thread(target=say_sign, args=(predict_sign,)).start()
+                                    else:
+                                        Thread(target=say_sign, args=(predict_sign,)).start()
+                                        # prev_sign=predict_sign
+                                    prev_sign = predict_sign
+                                # print(words_list)
+                                # cv2.putText(clone,'Sign'+str(predict_sign), (100, 300), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 0, 0))
 
-            cv2.rectangle(clone,(l,t),(r,b),(0,255,0),2)
-            num_frames+=1
-            cv2.imshow("Video Feed",clone)
+                        else:
+                            if words_list is not None:
+                                # Thread(target=say_sign,args=(words_list,)).start()
+                                words_list.clear()
+
+            cv2.rectangle(clone, (l, t), (r, b), (0, 255, 0), 2)
+            num_frames += 1
+            cv2.imshow("Video Feed", clone)
 
         else:
             messagebox.showerror("error","Can't grab frame")
             break
+
         k=cv2.waitKey(1)& 0xFF
         if (k==27):
            break

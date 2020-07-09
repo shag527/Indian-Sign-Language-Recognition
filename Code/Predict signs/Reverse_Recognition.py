@@ -10,6 +10,7 @@ def rr_main():
     import numpy as np
     from matplotlib.animation import FuncAnimation
     import tkinter as tk
+    import imageio
     from tkinter import messagebox
 
 
@@ -22,7 +23,7 @@ def rr_main():
         plt.pause(2)
         plt.close
 
-    path=('Saved Dataset//')
+    path=('Reverse sign images//')
     voice=sr.Recognizer()
     text=[]
     with sr.Microphone() as source:
@@ -40,6 +41,13 @@ def rr_main():
             #print("Your voice is not clear")
             messagebox.showerror("error","Your voice is not clear")
 
-    for l in text:
-        img=cv2.imread(path+str(l)+'.jpg')
-        display(img,l)
+    text.lower()
+    try:
+        for l in text:
+            if l is not ' ':
+                img=imageio.imread(path+str(l)+'.jpg')
+                display(img,l)
+    except:
+        messagebox.showerror("error","There was an error reading the input")
+
+#rr_main()

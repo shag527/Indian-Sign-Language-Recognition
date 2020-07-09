@@ -9,7 +9,6 @@ def cd_main():
     import tkinter as tk
     from tkinter import  messagebox
 
-    OPENCV_VIDEOIO_PRIORITY_MSMF = 0
     bg = None
 
     #To find the running average over the background
@@ -51,7 +50,7 @@ def cd_main():
 
     #print("Enter the method: (1 for keeping bg still and 2 for skin extraction")
     #method=int(input())
-    option=messagebox.askquestion('Select option','Is your background plain?')
+    option=messagebox.askquestion('Select option','Choose default method ?')
     if option=='yes':
         method=2
     else:
@@ -85,9 +84,10 @@ def cd_main():
                     run_avg(gray,aWeight)
                     cv2.putText(clone, "Keep the Camera still.", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0))
                 else:
-                    cv2.putText(clone, "Keep the Camera still.", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0))
-                    cv2.putText(clone, "Put your hand in the rectangle", (10, 150), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
-                    cv2.putText(clone, "Press the key of the sample", (10, 250), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                    cv2.putText(clone, "Press esc to exit.", (10, 200), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                    cv2.putText(clone, "Keep the Camera still.", (10, 50), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0))
+                    cv2.putText(clone, "Put your hand in the rectangle", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                    cv2.putText(clone, "Press the key of the sample", (10, 150), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
 
                     hand=extract_hand(gray)
                     if hand is not None:
@@ -96,14 +96,16 @@ def cd_main():
                         cv2.imshow("Threshold", thresh)
                         mask = np.zeros(thresh.shape, dtype="uint8")
                         cv2.drawContours(mask, [max_cont], -1, 255, -1)
+                        mask = cv2.medianBlur(mask, 5)
+                        mask = cv2.addWeighted(mask, 0.5, mask, 0.5, 0.0)
+                        kernel = np.ones((5, 5), np.uint8)
+                        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
                         res = cv2.bitwise_and(roi, roi, mask=mask)
                         res = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)
                         cv2.imshow("Extracted", res)
                         high_thresh, thresh_im = cv2.threshold(res, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
                         lowThresh = 0.5 * high_thresh
                         res = cv2.Canny(res, lowThresh, high_thresh)
-                        #res = cv2.bitwise_and(roi, roi, mask=thresh)
-                        cv2.imshow("Segmented", res)
 
             if method==2:
                 hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
@@ -117,20 +119,25 @@ def cd_main():
                 l_b = np.array([lh, ls, lv])
                 u_b = np.array([uh, us, uv])
 
-                cv2.putText(clone, "Put your hand in the rectangle", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.5,(0, 0, 0))
-                cv2.putText(clone, "Adjust the values using trackbar", (10, 150), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
-                cv2.putText(clone, "Press the key of the sample", (10, 200), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                cv2.putText(clone, "Put your hand in the rectangle", (10, 50), cv2.FONT_HERSHEY_COMPLEX, 0.5,(0, 0, 0))
+                cv2.putText(clone, "Adjust the values using trackbar", (10, 100), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                cv2.putText(clone, "Press the key of the sample", (10, 150), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
+                cv2.putText(clone, "Press esc to exit.", (10, 200), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
 
                 mask = cv2.inRange(hsv, l_b, u_b)
                 cv2.imshow('mask', mask)
                 mask = cv2.bitwise_not(mask)
+                mask = cv2.medianBlur(mask, 5)
+                mask = cv2.addWeighted(mask, 0.5, mask, 0.5, 0.0)
+                kernel = np.ones((5, 5), np.uint8)
+                mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+
                 res = cv2.bitwise_and(roi, roi, mask=mask)
                 res=cv2.cvtColor(res,cv2.COLOR_BGR2GRAY)
                 cv2.imshow('res', res)
                 high_thresh, thresh_im = cv2.threshold(res, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
                 lowThresh = 0.5 * high_thresh
                 res = cv2.Canny(res, lowThresh, high_thresh)
-                cv2.imshow('Canny',res)
 
 
 
@@ -168,6 +175,5 @@ def cd_main():
 
     cam.release()
     cv2.destroyAllWindows()
-
 
 #cd_main()
