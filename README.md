@@ -58,8 +58,8 @@ To run the project, perform the following steps -
 #### To create your own recognition system
 1. To use our dataset, go to the dataset link given above and download the images.
 2. To create your own dataset, following the steps given above, go to the create signs panel and create your own dataset of signs.
-3. Now, divide the dataset into train and test by running the Dividing_Datset.py file in the preprocessing folder.
-4. To create histograms and saving them to .csv file, run the create_train_hist and create_test_hist respectively by extrating the SURF features and clustering them using MiniKbatchMeans.
+3. Now, divide the dataset into train and test by running the Dividing_Datset.ipynb file in the preprocessing folder.
+4. To create histograms and saving them to .csv file, run the create_train_hist.py and create_test_hist.py respectively by extrating the SURF features and clustering them using MiniKbatchMeans.
 5. Lastly, go to the classification folder and run different python files to check the results. 
 6. You can also train your model using a convolutional nueral network by running the CNN.py file in the classification folder.
 
@@ -73,7 +73,7 @@ Here 2 methods for preprocessing are used. First one is the background subtracti
   <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/mask.png">       <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/after mask.png">       <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/canny.png">
   <br>
- Mask &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        After applying mask &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Canny Edge Detection
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;After applying mask &nbsp; &nbsp; &nbsp;&nbsp;Canny Edge detection
 </p>
   <br>
   
@@ -82,6 +82,8 @@ The Speeded Up Robust Feature (SURF) technique is used to extract descriptors fr
 <p align="center">
   <br>
   <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/surf.png">
+ <br>
+ &nbsp&nbsp&nbsp&nbsp&nbsp SURF Features
 </p>
 
 ### Classification
@@ -94,7 +96,7 @@ In this phase, various classifers are used in order to check the best classifier
 + Convolution Neural Network (CNN)
 
 #### Accuracy Plot
-The accuracy rate of different classifiers obtained are showb below:
+The accuracy rate of different classifiers obtained are shown below:
 <p align="center">
   <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/acc.png">
@@ -105,3 +107,7 @@ The predicted labels are shown in the form of text as well as speech using the p
 
 ### Reverse Sign Recognition
 Dual mode of communication is implemented. The spoken word is taken as input and the corresponding sign images are shown in sequence. Google speech API is used for this purpose.
+
+### Credits
++ [Bag of Visual Words (BOVW)](https://medium.com/@aybukeyalcinerr/bag-of-visual-words-bovw-db9500331b2f)
++ [Image Classification with Convolutional Neural Networks](https://medium.com/@ksusorokina/image-classification-with-convolutional-neural-networks-496815db12a8)
