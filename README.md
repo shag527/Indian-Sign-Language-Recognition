@@ -7,9 +7,9 @@ The purpose of this project is to recognize all the alphabets (A-Z) and digits (
 ### Pre-requisites
 Before running this project, make sure you have following dependencies - 
 * [pip](https://pypi.python.org/pypi/pip)
-* [Python 3.7](https://www.python.org/downloads/)
-* [OpenCV 3.4.2.16](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.html)
-* [opencv contrib python 3.4.2.16](https://pypi.org/project/opencv-contrib-python/)
+* [Python 3.7.1](https://www.python.org/downloads/)
+* [OpenCV](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.html)
+* [opencv contrib python](https://pypi.org/project/opencv-contrib-python/)
 
 ### Dataset
  Download the images from [here](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing)
@@ -25,6 +25,7 @@ Now, using ```pip install``` command, include the following dependencies
 + Pandas
 + Sklearn
 + Tensorflow
++ Scipy
 + Keras
 + Opencv
 + Tkinter
@@ -40,16 +41,16 @@ To run the project, perform the following steps -
 2. Now, go to the main.py file (Code folder->Predict signs folder) and run the file.
 3. A tkinter window like this will open.
 <p align="center">
+<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/login.png" width="400" height="410">
   <br>
-<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/login.png">
  </p>
 
 
 4. Create your account to access the system.
 5. Now, the main tkinter window will open.
 <p align="center">
-  <br>
-<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/main.png" >
+<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/main.png" width="400" height="410">
+   <br>
  </p>
 
 
