@@ -1,7 +1,7 @@
 # Indian-Sign-Language-Recognition
-Communication is very significant to human beings as it facilitates the spread of knowledge and forms relationships between people. We communicate through speech, facial expressions, hand signs, reading, writing or drawing etc. But speech is the most commonly used mode of communication. However, people with hearing and speaking disability only communicate through signs, which makes them highly dependent on non-verbal forms of communication. India is a vast country, having nearly five million people deaf and hearing impaired. Still very limited work has been done in this research area, beacuse of it's complex nature. Indian Sign Language (ISL) is predominantly used in South Asian countries and sometimes, it is also called as Indo-Pakistani Sign Language (IPSL). 
+Communication is very significant to human beings as it facilitates the spread of knowledge and forms relationships between people. We communicate through speech, facial expressions, hand signs, reading, writing or drawing etc. But speech is the most commonly used mode of communication. However, people with hearing and speaking disability only communicate through signs, which makes them highly dependent on non-verbal forms of communication. India is a vast country, having nearly five million people deaf and hearing impaired. Still very limited work has been done in this research area, because of its complex nature. Indian Sign Language (ISL) is predominantly used in South Asian countries and sometimes, it is also called as Indo-Pakistani Sign Language (IPSL). 
 
-The purpose of this project is to recognize all the alphabets (A-Z) and digits (0-9) of Indian sign language using bag of visual words model and convert them to text/speech. Dual mode of recognition is implemeted for better results. The system is tested using various machine learning classifiers like KNN, SVM, logistic regression and a convolutional neural network (CNN) is also implemented for the same. The dataset for this system is created manually in different hand orientations and a train-test ratio of 80:20 is used.
+The purpose of this project is to recognize all the alphabets (A-Z) and digits (0-9) of Indian sign language using bag of visual words model and convert them to text/speech. Dual mode of recognition is implemented for better results. The system is tested using various machine learning classifiers like KNN, SVM, logistic regression and a convolutional neural network (CNN) is also implemented for the same. The dataset for this system is created manually in different hand orientations and a train-test ratio of 80:20 is used.
 
 ## Getting Started
 ### Pre-requisites
@@ -14,7 +14,7 @@ Before running this project, make sure you have following dependencies -
 ### Dataset
  Download the images from [here](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing)
 
-Some images of the datset are shown below:
+Some images of the dataset are shown below:
 <p align="center">
   <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/dataset.png" width="800" height="750">   
@@ -59,7 +59,7 @@ To run the project, perform the following steps -
 #### To create your own recognition system
 1. To use our dataset, go to the dataset link given above and download the images.
 2. To create your own dataset, following the steps given above, go to the create signs panel and create your own dataset of signs.
-3. Now, divide the dataset into train and test by running the Dividing_Datset.ipynb file in the preprocessing folder.
+3. Now, divide the dataset into train and test by running the Dividing_Dataset.ipynb file in the preprocessing folder.
 4. To create histograms and saving them to .csv file, run the create_train_hist.py and create_test_hist.py respectively by extrating the SURF features and clustering them using MiniKbatchMeans.
 5. Lastly, go to the classification folder and run different python files to check the results. 
 6. You can also train your model using a convolutional nueral network by running the CNN.py file in the classification folder.
@@ -79,7 +79,7 @@ Here 2 methods for preprocessing are used. First one is the background subtracti
   <br>
   
 ### Feature Detction and Extraction:
-The Speeded Up Robust Feature (SURF) technique is used to extract descriptors from the segmented hand gesture images. These descriptors are then clusterized to form the similar clusters and then the histograms of visual words are generated, where each image is represented by the frequency of occurence of all the clustered features. The total classes are 36.
+The Speeded Up Robust Feature (SURF) technique is used to extract descriptors from the segmented hand gesture images. These descriptors are then clustered to form the similar clusters and then the histograms of visual words are generated, where each image is represented by the frequency of occurrence of all the clustered features. The total classes are 36.
 <p align="center">
   <br>
   <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/surf.png">
@@ -88,7 +88,7 @@ The Speeded Up Robust Feature (SURF) technique is used to extract descriptors fr
 </p>
 
 ### Classification
-In this phase, various classifers are used in order to check the best classifier for prediction. The classifiers used are:
+In this phase, various classifiers are used in order to check the best classifier for prediction. The classifiers used are:
 
 + Naive Bayes
 + Logistic Regression 
