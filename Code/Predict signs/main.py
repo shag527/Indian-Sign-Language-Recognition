@@ -21,7 +21,6 @@ from Reverse_Recognition import rr_main
 #global variables
 bg=None
 selection=1
-#selection=1
 
 
 # =====================Create Database=============================================
@@ -66,7 +65,7 @@ def loggin():
         if results:
             for i in results:
                 window.destroy()
-                # ==================Window2+CreateFrame+f1============Animation also================================================
+                # ==================Window2+CreateFrame+Animation============================================================
                 window2 = Tk()
                 f1 = Frame(window2)
                 f2 = Frame(window2)
@@ -190,7 +189,7 @@ def loggin():
                 btn6w2 = ttk.Button(f1, text="Create Signs", command=cd_main)
                 btn6w2.place(x=255, y=225, width=150, height=30)
 
-                # =========================Window2Frame4DevelopersPage=========================================
+                # =========================Developers Page=========================================
 
                 label10 = Label(f4, text="", font=("arial", 20, "bold"), bg="grey16", fg="white")
                 label10.pack(side=TOP, fill=X)
@@ -229,7 +228,7 @@ def loggin():
             break
 
 
-# ======================MainLoginScreen============================================
+# ======================Main Login Screen============================================
 
 window = Tk()
 window.title("Login Panel")
@@ -238,7 +237,7 @@ Label1.pack(side=TOP, fill=X)
 Label2 = Label(window, text="", font=("arial", 10, "bold"), bg="grey19", fg="white")
 Label2.pack(side=BOTTOM, fill=X)
 
-# ====================LoginandSignupTabs====================================
+# ====================Login and Signup Tabs====================================
 
 nb = ttk.Notebook(window)
 tab1 = ttk.Frame(nb)
@@ -247,7 +246,7 @@ nb.add(tab1, text="Login")
 nb.add(tab2, text="Sign_up")
 nb.pack(expand=True, fill="both")
 
-# =============Logintab=========================================
+# =============Login tab=========================================
 
 name2_label = Label(tab1, text="Name", font=("arial", 10, "bold"))
 name2_label.place(x=10, y=10)
@@ -262,7 +261,7 @@ pass2_entry = StringVar()
 pass2_entry = ttk.Entry(tab1, textvariable=pass2_entry, show="*")
 pass2_entry.place(x=90, y=40)
 
-# =====================SignupTab===============================
+# =====================Signup Tab===============================
 name_label = Label(tab2, text="Name", font=("arial", 10, "bold"))
 name_label.place(x=10, y=10)
 name_entry = StringVar()
@@ -280,14 +279,14 @@ def clear():
     name_entry.delete(0, END)
     pass_entry.delete(0, END)
 
-# ===============AddUserButtons==============================================
+# ===============User Buttons==============================================
 
 btn1 = ttk.Button(tab2, text="Add User", command=saveadmin)
 btn1.place(x=50, y=80)
 btn2 = ttk.Button(tab2, text="Clear", command=clear)
 btn2.place(x=140, y=80)
 
-# ================LoginButtonMainwindow1======================================
+# ================Login Button Main======================================
 
 btn3 = ttk.Button(tab1, text="Login", width=20, command=loggin)
 btn3.place(x=87, y=80)
