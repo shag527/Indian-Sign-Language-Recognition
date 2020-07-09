@@ -1,5 +1,7 @@
 # Indian-Sign-Language-Recognition
-Communication is very significant to human beings as it facilitates the spread of knowledge and forms relationships between people. We communicate through speech, facial expressions, hand signs, reading, writing or drawing etc. But speech is the most commonly used mode of communication. However, people with hearing and speaking disability only communicate through signs, which makes them highly dependent on non-verbal forms of communication. India is a vast country, having nearly five million people deaf and hearing impaired. Still very limited work has been done in this research area, beacuse of it's complex nature. Indian Sign Language (ISL) is predominantly used in South Asian countries and sometimes, it is also called as Indo-Pakistani Sign Language (IPSL). The purpose of this project is to recognize all the alphabets (A-Z) and digits (0-9) of Indian sign language using bag of visual words model and convert them to text/speech. Dual mode of recognition is implemeted for better results. Ths system is tested using various  machine learning classifiers like KNN, SVM, logistic regression and a convolutional neural network (CNN) is also implemented for the same. The dataset for this system is created manually in different hand orientations and a train-test ratio of 80:20 is used. The model gives very high accuracy rate.
+Communication is very significant to human beings as it facilitates the spread of knowledge and forms relationships between people. We communicate through speech, facial expressions, hand signs, reading, writing or drawing etc. But speech is the most commonly used mode of communication. However, people with hearing and speaking disability only communicate through signs, which makes them highly dependent on non-verbal forms of communication. India is a vast country, having nearly five million people deaf and hearing impaired. Still very limited work has been done in this research area, beacuse of it's complex nature. Indian Sign Language (ISL) is predominantly used in South Asian countries and sometimes, it is also called as Indo-Pakistani Sign Language (IPSL). 
+
+The purpose of this project is to recognize all the alphabets (A-Z) and digits (0-9) of Indian sign language using bag of visual words model and convert them to text/speech. Dual mode of recognition is implemeted for better results. Ths system is tested using various machine learning classifiers like KNN, SVM, logistic regression and a convolutional neural network (CNN) is also implemented for the same. The dataset for this system is created manually in different hand orientations and a train-test ratio of 80:20 is used. The model gives very high accuracy rate.
 
 ## Getting Started
 ### Pre-requisites
@@ -13,7 +15,10 @@ Before running this project, make sure you have following dependencies -
  Download the images from [here](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing)
 
 Some images of the datset are shown below:
+<p align="center">
+  <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/dataset.png" width="800" height="750">   
+ </p>
 
 Now, using ```pip install``` command, include the following dependencies 
 + Numpy 
@@ -34,12 +39,18 @@ To run the project, perform the following steps -
 1. Take all the files and folders and put them in the same folder.
 2. Now, go to the main.py file (Code folder->Predict signs folder) and run the file.
 3. A tkinter window like this will open.
+<p align="center">
+  <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/login.png">
+ </p>
 
 
 4. Create your account to access the system.
 5. Now, the main tkinter window will open.
+<p align="center">
+  <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/main.png" >
+ </p>
 
 
 6. Click on the desired button to access the respective service.
@@ -82,27 +93,15 @@ In this phase, various classifers are used in order to check the best classifier
 + Support Vector Machine (SVM)
 + Convolution Neural Network (CNN)
 
-### Results
-Results can be visualized by running file [visualize_submissions.py](https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Visualization/visualize_submissions.py).
-
-#### Accuracy without SURF
-
+#### Accuracy Plot
+The accuracy rate of different classifiers obtained are showb below:
 <p align="center">
   <br>
-  <img align="center" src="https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Visualization/accuracy_without_surf.png">
-        <br>  
-  </p>
-  
-#### Accuracy with SURF
+<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/acc.png">
+ </p>
 
-<p align="center">
-  <br>
-  <img align="center" src="https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Visualization/acuracy_with_surf.png">
-</p>
+### Output
+The predicted labels are shown in the form of text as well as speech using the python text to speech conversion library, Pyttsx3.
 
-### Credits
-If there are any doubts or queries with the process, refer these posts, they are amazing -
-
-+ [Post 1](https://ianlondon.github.io/blog/how-to-sift-opencv/)
-+ [Post 2](https://ianlondon.github.io/blog/visual-bag-of-words/)
-
+### Reverse Sign Recognition
+Dual mode of communication is implemented. The spoken word is taken as input and the corresponding sign images are shown in sequence. Google speech API is used for this purpose.
