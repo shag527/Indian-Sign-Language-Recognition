@@ -4,45 +4,63 @@ Communication is very significant to human beings as it facilitates the spread o
 ## Getting Started
 ### Pre-requisites
 Before running this project, make sure you have following dependencies - 
-* [Python 3.7](https://www.python.org/downloads/)
 * [pip](https://pypi.python.org/pypi/pip)
-* [OpenCV](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.html)
+* [Python 3.7](https://www.python.org/downloads/)
+* [OpenCV 3.4.2.16](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.html)
+* [opencv contrib python 3.4.2.16](https://pypi.org/project/opencv-contrib-python/)
 
 ### Dataset
-* [Dataset](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing) (Download the images from here)
+ Download the images from [here](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing)
 
-Now, using ```pip install``` command, include following dependencies 
+Some images of the datset are shown below:
+<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/dataset.png" width="800" height="750">   
+
+Now, using ```pip install``` command, include the following dependencies 
 + Numpy 
 + Pandas
 + Sklearn
-+ Scipy
-+ Opencv
 + Tensorflow
++ Keras
++ Opencv
++ Tkinter
++ Sqlite3
++ Pyttsx3
++ SpeechRecognition (Google speech API)
 
-### Running
-To run the project, perform following steps -
+### Run Project
+To run the project, perform the following steps -
 
-1. Take the dataset folder and all the required python files and put them in the same folder.
-2. Required files are - surf_image_processing.py(Image preprocessing folder), preprocessing_surf.py (Bag of features folder), classification.py(classification folder) and visualize_submissions.py(visualization folder). 
-3. Run the preprocessing_surf.py file to make the csv file of training data set.
-4. classification.py contains the code for svm, knn and many other classifiers.
-5. cnn.py contains the code for deep learning as the name suggests. 
+#### To use our project
+1. Take all the files and folders and put them in the same folder.
+2. Now, go to the main.py file (Code folder->Predict signs folder) and run the file.
+3. A tkinter window like this will open.
+<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/login.png">
+
+
+4. Create your account to access the system.
+5. Now, the main tkinter window will open.
+<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/main.png" >
+
+
+6. Click on the desired button to access the respective service.
+
+#### To create your own recognition system
+1. To use our dataset, go to the dataset link given above and download the images.
+2. To create your own dataset, following the steps given above, go to the create signs panel and create your own dataset of signs.
+3. Now, divide the dataset into train and test by running the Dividing_Datset.py file in the preprocessing folder.
+4. To create histograms and saving them to .csv file, run the create_train_hist and create_test_hist respectively by extrating the SURF features and clustering them using MiniKbatchMeans.
+5. Lastly, go to the classification folder and run different python files to check the results. 
+6. You can also train your model using a convolutional nueral network by running the CNN.py file in the classification folder.
+
 
 ## Workflow
 
-<p align="center">
-  <br>
-  <img align="center" src="https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Visualization/flowchart.jpg">
-</p>
-
-### Image Preprocessing
-
-#### Segmentation:
-The main objective of the segmentation phase is to remove the background and noises, leaving only the Region of Interest (ROI), which is the only useful information in the image. This is achieved via Skin Masking defining the threshold on RGB schema and then converting RGB colour space to grey scale image. Finally Canny Edge technique is employed to identify and detect the presence of sharp discontinuities in an image, thereby detecting the edges of the figure in focus.  
+### Preprocessing
+Here 2 methods for preprocessing are used. First one is the background subtraction using additive method, in which first 30 frames are considered as background and any new object in the frame is then filtered out. Second one uses the skin segmentation concept, which is based on the extraction of skin color pixels of the user.
 
 <p align="center">
   <br>
-<img align="center" src="https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Processed_images/BGR2HSV.png">       <img align="center" src="https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Processed_images/masked.png">       <img align="center" src="https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Processed_images/canny%20edge%20detection.png">
+<img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/mask.png">       <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/after mask.png">       <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/canny.png">
   <br>
   BGR to HSV    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Masked   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Canny Edge
 </p>
