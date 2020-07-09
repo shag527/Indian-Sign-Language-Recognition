@@ -62,42 +62,25 @@ Here 2 methods for preprocessing are used. First one is the background subtracti
   <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/mask.png">       <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/after mask.png">       <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/canny.png">
   <br>
-  BGR to HSV    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Masked   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Canny Edge
+ Mask &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        After applying mask &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Canny Edge Detection
 </p>
   <br>
   
-#### Feature Extraction:
-The Speeded Up Robust Feature (SURF) technique is used to extract descriptors from the segmented hand gesture images. SURF is a novel feature extraction method which is robust against rotation, scaling, occlusion and variation in viewpoint.
+### Feature Detction and Extraction:
+The Speeded Up Robust Feature (SURF) technique is used to extract descriptors from the segmented hand gesture images. These descriptors are then clusterized to form the similar clusters and then the histograms of visual words are generated, where each image is represented by the frequency of occurence of all the clustered features. The total classes are 36.
 <p align="center">
   <br>
-  <img align="center" src="https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Processed_images/SURF_D.png">
+  <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/surf.png">
 </p>
 
 ### Classification
-The SURF descriptors extracted from each image are different in number with the same dimension (64). However, a multiclass SVM requires uniform dimensions of feature vector as its input. Bag of Features (BoF) is therefore implemented to represent the features in histogram of visual vocabulary rather than the features as proposed. The descriptors extracted are first quantized into 150 clusters using K-means clustering. Given a set of descriptors, where K-means clustering categorizes numbers of descriptors into K numbers of cluster center.
+In this phase, various classifers are used in order to check the best classifier for prediction. The classifiers used are:
 
-The clustered features then form the visual vocabulary where each feature corresponds to an individual sign language gesture. With the visual vocabulary, each image is represented by the frequency of occurrence of all clustered features. BoF represents each image as a histogram of features, in this case the histogram of 24 classes of sign languages gestures. 
-
-#### Bag of Features model
-
-Following Steps are followed to achieve this:
-
-* The descriptors extracted are first clustered into 150 clusters using K-Means clustering.
-
-* K-means clustering technique categorizes m numbers of descriptors into x number of cluster centre.
-
-* The clustered features form the basis for histogram i-e each image is represented by frequency of occurrence of all clustered features.
-
-* BoF represents each image as a histogram of features, in our case the histogram of 24 classes of sign language is generated.
-
-#### Classifiers
-
-After obtaining the baf of features model, we are set to predict results for new raw images to test our model. Following classifiers are used :
 + Naive Bayes
-+ Logistic Regression classifier
-+ K-Nearest Neighbours
-+ Support Vector Machines
-+ Convolution Neaural Network
++ Logistic Regression 
++ K-Nearest Neighbours (KNN)
++ Support Vector Machine (SVM)
++ Convolution Neural Network (CNN)
 
 ### Results
 Results can be visualized by running file [visualize_submissions.py](https://github.com/imRishabhGupta/Indian-Sign-Language-Recognition/blob/master/Visualization/visualize_submissions.py).
