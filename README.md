@@ -9,7 +9,7 @@ Before running this project, make sure you have following dependencies -
 * [pip](https://pypi.python.org/pypi/pip)
 * [Python 3.7.1](https://www.python.org/downloads/)
 * [OpenCV](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.html)
-* [opencv contrib python](https://pypi.org/project/opencv-contrib-python/)
+* [Opencv contrib](https://pypi.org/project/opencv-contrib-python/)
 
 ### Dataset
  Download the images from [here](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing)
