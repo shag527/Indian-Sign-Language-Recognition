@@ -58,7 +58,7 @@ To run the project, perform the following steps -
 
 #### To create your own recognition system
 1. To use our dataset, go to the dataset link given above and download the images.
-2. To create your own dataset, following the steps given above, go to the create signs panel and create your own dataset of signs.
+2. To create your own dataset, following the steps given above, go to the create signs panel and create signs.
 3. Now, divide the dataset into train and test by running the Dividing_Dataset.ipynb file in the preprocessing folder.
 4. To create histograms and saving them to .csv file, run the create_train_hist.py and create_test_hist.py respectively by extrating the SURF features and clustering them using MiniKbatchMeans.
 5. Lastly, go to the classification folder and run different python files to check the results. 
@@ -68,7 +68,7 @@ To run the project, perform the following steps -
 ## Workflow
 
 ### Preprocessing
-Here 2 methods for preprocessing are used. First one is the background subtraction using additive method, in which first 30 frames are considered as background and any new object in the frame is then filtered out. Second one uses the skin segmentation concept, which is based on the extraction of skin color pixels of the user.
+Here 2 methods for preprocessing are used. First one is the background subtraction using an additive method, in which the first 30 frames are considered as background and any new object in the frame is then filtered out. Second one uses the skin segmentation concept, which is based on the extraction of skin color pixels of the user.
 
 <p align="center">
   <br>
