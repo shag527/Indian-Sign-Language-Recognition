@@ -82,7 +82,7 @@ Here 2 methods for preprocessing are used. First one is the background subtracti
 The Speeded Up Robust Feature (SURF) technique is used to extract descriptors from the segmented hand gesture images. These descriptors are then clustered to form the similar clusters and then the histograms of visual words are generated, where each image is represented by the frequency of occurrence of all the clustered features. The total classes are 36.
 <p align="center">
   <br>
-  <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/surf.png">
+  <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/SURF.png">
  <br>
  &nbsp&nbsp&nbsp&nbsp&nbsp SURF Features
 </p>
