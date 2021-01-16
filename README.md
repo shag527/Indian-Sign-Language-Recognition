@@ -12,8 +12,6 @@ Before running this project, make sure you have following dependencies -
 * [Opencv contrib](https://pypi.org/project/opencv-contrib-python/)
 
 ### Dataset
- Download the images from [here](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing)
-
 Some images of the dataset are shown below:
 <p align="center">
   <br>
