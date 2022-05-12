@@ -35,14 +35,15 @@ scipy==1.4.1
 seaborn==0.10.1
 sklearn==0.0
 SpeechRecognition==3.8.1
-tensorboard==1.13.1
-tensorflow>=1.15.2
-tensorflow-estimator==1.13.0
+tensorboard==1.15.0
+tensorflow==1.15.2
+tensorflow-estimator==1.15.1
 tflearn==0.3.2
 ttkthemes==3.1.0
 virtualenv==20.0.4
 virtualenvwrapper-win==1.2.6
 XlsxWriter==1.2.9
 zipp==0.6.0
+
 
 # Install PyAudio @ file:PyAudio-0.2.11-cp37-cp37m-win_amd64.whl by downloading from https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio
