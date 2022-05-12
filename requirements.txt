@@ -27,7 +27,6 @@ pandas==0.25.3
 pickleshare==0.7.5
 Pillow>=7.1.0
 playsound==1.2.2
-PyAudio @ file:PyAudio-0.2.11-cp37-cp37m-win_amd64.whl
 pyttsx3==2.88
 pywin32==227
 scikit-learn==0.22.2.post1
@@ -45,3 +44,5 @@ virtualenv==20.0.4
 virtualenvwrapper-win==1.2.6
 XlsxWriter==1.2.9
 zipp==0.6.0
+
+# Install PyAudio @ file:PyAudio-0.2.11-cp37-cp37m-win_amd64.whl by downloading from https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio
