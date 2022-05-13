@@ -3,6 +3,11 @@ Communication is very significant to human beings as it facilitates the spread o
 
 The purpose of this project is to recognize all the alphabets (A-Z) and digits (0-9) of Indian sign language using bag of visual words model and convert them to text/speech. Dual mode of recognition is implemented for better results. The system is tested using various machine learning classifiers like KNN, SVM, logistic regression and a convolutional neural network (CNN) is also implemented for the same. The dataset for this system is created manually in different hand orientations and a train-test ratio of 80:20 is used.
 
+#### Research Paper [Indian Sign Language recognition system using SURF with SVM and CNN](https://www.sciencedirect.com/science/article/pii/S2590005622000121?via%3Dihub#!)
+If you use this in your research, please cite: 
+
+`Shagun Katoch, Varsha Singh, Uma Shanker Tiwary, Indian Sign Language recognition system using SURF with SVM and CNN, Array, Volume 14, 2022, 100141, ISSN 2590-0056, https://doi.org/10.1016/j.array.2022.100141`.
+
 ## Getting Started
 ### Pre-requisites
 Before running this project, make sure you have following dependencies - 
@@ -10,57 +15,49 @@ Before running this project, make sure you have following dependencies -
 * [Python 3.7.1](https://www.python.org/downloads/)
 * [OpenCV](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_setup/py_setup_in_windows/py_setup_in_windows.html)
 * [Opencv contrib](https://pypi.org/project/opencv-contrib-python/)
+* [Anaconda Distribution](https://www.anaconda.com/products/individual)
 
 ### Dataset
+Download the images from [here](https://drive.google.com/drive/folders/1SY67sDO2ROoOoBhTBIIDn17gStS0AvCB?usp=sharing)
+
 Some images of the dataset are shown below:
 <p align="center">
   <br>
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/dataset.png" width="800" height="750">   
  </p>
 
-Now, using ```pip install``` command, include the following dependencies 
-+ Numpy 
-+ Pandas
-+ Sklearn
-+ Tensorflow
-+ Scipy
-+ Keras
-+ Opencv
-+ Tkinter
-+ Sqlite3
-+ Pyttsx3
-+ SpeechRecognition (Google speech API)
-
 ### Run Project
 To run the project, perform the following steps -
+1. ```git clone https://github.com/shag527/Indian-Sign-Language-Recognition.git```
+2. ```conda create --name sign python=3.7.1```<br />
+3. ```conda activate sign```. 
+4. ```pip install -r requirements.txt```. 
+5. ```cd to the GitHub Repo till Predict signs folder```. 
 
-#### To use our project
-1. Take all the files and folders and put them in the same folder.
-2. Now, go to the main.py file (Code folder->Predict signs folder) and run the file.
-3. A tkinter window like this will open.
+Command may look like: ```cd 'C:\Users\.....\Indian-Sign-Language-Recognition/Code/Predict signs/'```
+
+6. ```python main.py```
+
+A tkinter window like this will open.
 <p align="center">
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/login.png" width="400" height="410">
   <br>
  </p>
 
-
-4. Create your account to access the system.
-5. Now, the main tkinter window will open.
+7. Create your account to access the system.
+8. Now, the main tkinter window will open.
 <p align="center">
 <img align="center" src="https://github.com/shag527/Indian-Sign-Language-Recognition/blob/master/Images/main.png" width="400" height="410">
    <br>
  </p>
-
-
-6. Click on the desired button to access the respective service.
+9. Click on the desired button to access the respective service.
 
 #### To create your own recognition system
-1. To use our dataset, go to the dataset link given above and download the images.
-2. To create your own dataset, following the steps given above, go to the create signs panel and create signs.
-3. Now, divide the dataset into train and test by running the Dividing_Dataset.ipynb file in the preprocessing folder.
-4. To create histograms and saving them to .csv file, run the create_train_hist.py and create_test_hist.py respectively by extrating the SURF features and clustering them using MiniKbatchMeans.
-5. Lastly, go to the classification folder and run different python files to check the results. 
-6. You can also train your model using a convolutional nueral network by running the CNN.py file in the classification folder.
+1. To create your own dataset, following the steps given above, go to the create signs panel and create signs.
+2. Now, divide the dataset into train and test by running the Dividing_Dataset.ipynb file in the preprocessing folder.
+3. To create histograms and saving them to .csv file, run the create_train_hist.py and create_test_hist.py respectively by extrating the SURF features and clustering them using MiniKbatchMeans.
+4. Lastly, go to the classification folder and run different python files to check the results. 
+5. After saving the model, you can load the model for testing purposes.
 
 
 ## Workflow
