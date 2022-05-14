@@ -34,7 +34,7 @@ To run the project, perform the following steps -
 4. ```pip install -r requirements.txt```. 
 5. ```cd to the GitHub Repo till Predict signs folder```. 
 
-Command may look like: ```cd 'C:\Users\.....\Indian-Sign-Language-Recognition/Code/Predict signs/'```
+Command may look like: ```cd 'C:\Users\.....\Indian-Sign-Language-Recognition\Code\Predict signs\'```
 
 6. ```python main.py```
 
